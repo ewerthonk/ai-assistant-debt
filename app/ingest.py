@@ -4,7 +4,12 @@ import pandas as pd
 from pathlib import Path
 
 # Constants
-DATA_FILE_PATH = Path(__file__).parent.parent.joinpath("data").joinpath("raw").joinpath("2024_case_cientista_de_dados_ia.csv")
+DATA_FILE_PATH = (
+    Path(__file__)
+    .parent.parent.joinpath("data")
+    .joinpath("raw")
+    .joinpath("2024_case_cientista_de_dados_ia.csv")
+)
 DATABASES_PATH = Path(__file__).parent.parent.joinpath("data").joinpath("databases")
 
 # Data schema
@@ -33,7 +38,9 @@ df = pd.read_csv(
 )
 
 # Connection to database (SQLite)
-info_db_connection = sqlite3.connect(DATABASES_PATH.joinpath("info.db"), check_same_thread=False)
+info_db_connection = sqlite3.connect(
+    DATABASES_PATH.joinpath("info.db"), check_same_thread=False
+)
 
 # Writing table to database
 df.to_sql(name="customers", con=info_db_connection, if_exists="replace", index=False)

@@ -12,9 +12,19 @@ from langchain.tools import BaseTool
 # Local Imports
 from ingest import info_db_connection
 
+
 class BaseSqlLiteTool(BaseModel):
-    """Base tool for interacting with SQLite Database."""
+    """
+    Base tool for interacting with SQLite Database.
+
+    Attributes
+    ----------
+    connection : sqlite3.Connection
+        SQLite database connection.
+    """
+
     connection: sqlite3.Connection = Field(exclude=True)
+
     # Pass sqlite3.Connection validation
     class Config(BaseTool.Config):
         pass
@@ -28,33 +38,77 @@ class AuthenticateUserInput(BaseModel):
         description="string com a data de nascimento do usuário no formato 'YYYY-MM-DD'"
     )
 
+
 class AuthenticateUser(BaseSqlLiteTool, BaseTool):
+    """
+    Tool for authenticating users using SQLite database connection.
+
+    Attributes
+    ----------
+    name : str
+        Name of the tool.
+    description : str
+        Description of the tool.
+    args_schema : Type[BaseModel]
+        Schema for the tool's input arguments.
+
+    Methods
+    -------
+    _run(cpf: str, data_nascimento: str, run_manager: Optional[CallbackManagerForToolRun]=None) -> bool
+        Runs the tool with the provided CPF and date of birth, returning authentication result.
+    """
+
     name: str = "autenticar_usuario"
     description: str = dedent("""\
         Autentica o usuário. 
         Os inputs são o CPF e a data de nascimento do usuário. 
         Output é uma mensagem informando se o CPF não foi encontrado nos cadastros ou se a data de nascimento não está correta para aquele usuário.
         Ou, caso tenha sido encontrado, o output é um pandas.DataFrame
-        """
-    )
+        """)
     args_schema: Type[BaseModel] = AuthenticateUserInput
+
     def _run(
-        self, 
+        self,
         cpf: str,
         data_nascimento: str,
-        run_manager: Optional[CallbackManagerForToolRun]=None,
+        run_manager: Optional[CallbackManagerForToolRun] = None,
     ) -> bool:
+        """
+        Runs the tool with the provided CPF and date of birth, returning authentication result.
+
+        Parameters
+        ----------
+        cpf : str
+            CPF of the user.
+        data_nascimento : str
+            Date of birth of the user in 'YYYY-MM-DD' format.
+        run_manager : Optional[CallbackManagerForToolRun], optional
+            Callback manager for tool run, by default None.
+
+        Returns
+        -------
+        bool
+            Authentication result message or pandas.DataFrame if authenticated.
+        """
         cursor = self.connection.cursor()
-        if not cursor.execute(f"SELECT * FROM customers WHERE cpf_cnpj = '{cpf}'").fetchone():
+        if not cursor.execute(
+            f"SELECT * FROM customers WHERE cpf_cnpj = '{cpf}'"
+        ).fetchone():
             cursor.close()
             return "CPF não encontrado no cadastro da empresa. Checar CPF novamente."
-        elif not cursor.execute(f"SELECT * FROM customers WHERE cpf_cnpj = '{cpf}' AND DATE(data_nascimento) = '{data_nascimento}'").fetchone():
+        elif not cursor.execute(
+            f"SELECT * FROM customers WHERE cpf_cnpj = '{cpf}' AND DATE(data_nascimento) = '{data_nascimento}'"
+        ).fetchone():
             cursor.close()
             return "Os dados informados não foram encontrados no sistema. Checar data de nascimento novamente."
         else:
-            df = pd.read_sql_query(f"SELECT * FROM customers WHERE cpf_cnpj = '{cpf}' AND DATE(data_nascimento) = '{data_nascimento}'", self.connection)
+            df = pd.read_sql_query(
+                f"SELECT * FROM customers WHERE cpf_cnpj = '{cpf}' AND DATE(data_nascimento) = '{data_nascimento}'",
+                self.connection,
+            )
             cursor.close()
             return df
+
 
 # Creating tools instances
 authenticate_user_tool = AuthenticateUser(connection=info_db_connection)

@@ -17,8 +17,7 @@ authenticator_prompt_content = dedent("""\
             
             Extras:
             - Você sempre deve responder no idioma Português Brasileiro.
-            - Hoje é {today}."""
-        )
+            - Hoje é {today}.""")
 
 information_prompt_content = dedent("""\
             Definição: 
@@ -53,5 +52,4 @@ information_prompt_content = dedent("""\
             
             Extras:
             - Você sempre deve responder no idioma Português Brasileiro.
-            - Hoje é {today}."""
-        )
+            - Hoje é {today}.""")

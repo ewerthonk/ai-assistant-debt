@@ -20,7 +20,7 @@ from nodes import (
     AuthenticatorToolNode,
     InformationAgentNode,
     AuthenticatorOrInfoRouter,
-    ToolRouter
+    ToolRouter,
 )
 
 # Constants
@@ -30,8 +30,13 @@ DATABASES_PATH = Path(__file__).parent.parent.joinpath("data").joinpath("databas
 _ = dotenv.load_dotenv(dotenv.find_dotenv())
 
 # Variables
-chatgpt_model = ChatOpenAI(model="gpt-4o", temperature=0, max_retries=2,)
+chatgpt_model = ChatOpenAI(
+    model="gpt-4o",
+    temperature=0,
+    max_retries=2,
+)
 memory = SqliteSaver.from_conn_string(DATABASES_PATH.joinpath("memory.db"))
+
 
 # Graph State
 class State(TypedDict):
@@ -46,29 +51,46 @@ class State(TypedDict):
     produto: Union[str, None]
 
 
-# Graph Design
+# Graph Design and State
 graph_builder = StateGraph(State)
 
-graph_builder.add_node("starting_node",  StartNode())
-graph_builder.add_node("authenticator_agent", AuthenticatorAgentNode(model=chatgpt_model, prompt=authenticator_prompt_content))
+# Graph Nodes
+graph_builder.add_node("starting_node", StartNode())
+graph_builder.add_node(
+    "authenticator_agent",
+    AuthenticatorAgentNode(model=chatgpt_model, prompt=authenticator_prompt_content),
+)
 graph_builder.add_node("authenticator_tool", AuthenticatorToolNode())
-graph_builder.add_node("information_agent", InformationAgentNode(model=chatgpt_model, prompt=information_prompt_content))
+graph_builder.add_node(
+    "information_agent",
+    InformationAgentNode(model=chatgpt_model, prompt=information_prompt_content),
+)
 
+# Graph Routes
 graph_builder.set_entry_point("starting_node")
 graph_builder.add_conditional_edges(
     "starting_node",
     AuthenticatorOrInfoRouter(),
-    {"to_auth": "authenticator_agent", "to_info": "information_agent",},
+    {
+        "to_auth": "authenticator_agent",
+        "to_info": "information_agent",
+    },
 )
 graph_builder.add_conditional_edges(
     "authenticator_agent",
     ToolRouter(),
-    {"to_tool": "authenticator_tool", "to_user": END,},
+    {
+        "to_tool": "authenticator_tool",
+        "to_user": END,
+    },
 )
 graph_builder.add_conditional_edges(
     "authenticator_tool",
     AuthenticatorOrInfoRouter(),
-    {"to_auth": "authenticator_agent", "to_info": "information_agent",},
+    {
+        "to_auth": "authenticator_agent",
+        "to_info": "information_agent",
+    },
 )
 graph_builder.set_finish_point("information_agent")
 

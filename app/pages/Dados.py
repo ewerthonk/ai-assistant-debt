@@ -1,5 +1,4 @@
 # Basic Imports
-import os
 import dotenv
 from pathlib import Path
 
@@ -15,8 +14,8 @@ _ = dotenv.load_dotenv(dotenv.find_dotenv())
 RESOURCES_DIR = Path(__file__).parent.parent.joinpath("resources")
 
 st.set_page_config(
-    page_title="Dados | Case Acerto", 
-    page_icon=str(RESOURCES_DIR.joinpath("logo_2.png")), 
+    page_title="Dados | Case Acerto",
+    page_icon=str(RESOURCES_DIR.joinpath("logo_2.png")),
     layout="wide",
 )
 
