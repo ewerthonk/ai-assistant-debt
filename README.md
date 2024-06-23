@@ -12,7 +12,7 @@ Projeto de chatbot de atendimento ao consumidor para uma empresa de negociação
   - SQLite (base de dados)
 - Frontend
   - Docker (conteinerização)
-  - Streamlit (Interface com o chatbot)
+  - Streamlit (interface com o chatbot)
   - Google Cloud Run (implantação pública)
 - Extras
   - Ruff (linting e formatação)
