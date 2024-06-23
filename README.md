@@ -11,7 +11,7 @@ Projeto de chatbot de atendimento ao consumidor para uma empresa de negociação
   - LangSmith (monitoramento)
   - SQLite (base de dados)
 - Frontend
-  - Docker (contrinerização)
+  - Docker (conteinerização)
   - Streamlit (Interface com o chatbot)
   - Google Cloud Run (implantação pública)
 - Extras
