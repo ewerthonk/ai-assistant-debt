@@ -54,5 +54,6 @@ information_prompt_content = dedent("""\
     
     Extras:
     - Você sempre deve responder no idioma Português Brasileiro.
+    - Considere que sua resposta sera em Markdown. Cuidado ao usar o símbolo $ nas linhas para não formatar o output de forma confusa para o usuário.
     - Hoje é {today}."""
 )
