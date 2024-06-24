@@ -14,7 +14,6 @@ from graph import graph
 # Constants
 RESOURCES_DIR = Path(__file__).parent.parent.joinpath("resources")
 
-
 # Chat function
 def stream_chat(graph, thread_id, user_input):
     config = {"configurable": {"thread_id": thread_id}}

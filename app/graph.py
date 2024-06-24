@@ -46,6 +46,7 @@ class State(TypedDict):
     data_nascimento: Union[str, None]
     nome: Union[str, None]
     opcoes_pagamento: Union[str, None]
+    valor_atual_divida: Union[str, None]
     data_origem_divida: Union[str, None]
     loja: Union[str, None]
     produto: Union[str, None]

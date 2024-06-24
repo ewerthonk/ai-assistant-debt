@@ -11,7 +11,6 @@ from tools import authenticate_user_tool, tools_by_name
 # Constants
 TODAY = str(datetime.now().date())
 
-
 # Classes (Nodes)
 class StartNode:
     """
@@ -106,6 +105,14 @@ class AuthenticatorToolNode:
                 .str.replace("}", "}}")
                 .item()
             )
+            state["valor_atual_divida"] = (
+                str(
+                    df["valor_vencido"]
+                    .add(df["valor_multa"])
+                    .add(df["valor_juros"])
+                    .item()
+                )
+            )
             state["data_origem_divida"] = df["data_origem"].item()
             state["loja"] = df["loja"].item()
             state["produto"] = df["produto"].item()
@@ -188,6 +195,7 @@ class InformationAgentNode:
                         debt_origin_date=state["data_origem_divida"],
                         name=state["nome"],
                         store=state["loja"],
+                        current_debt_value=state["valor_atual_divida"],
                         today=TODAY,
                     ),
                 ),

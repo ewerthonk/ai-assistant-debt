@@ -29,12 +29,16 @@ data_file_data_types = {
 }
 
 # Ingesting datas do DataFrame
-df = pd.read_csv(
-    filepath_or_buffer=DATA_FILE_PATH,
-    dtype=data_file_data_types,
-    parse_dates=["data_nascimento", "data_origem"],
-    dayfirst=True,
-    decimal=",",
+df = (
+    pd.read_csv(
+        filepath_or_buffer=DATA_FILE_PATH,
+        dtype=data_file_data_types,
+        parse_dates=["data_nascimento", "data_origem"],
+        dayfirst=True,
+        decimal=",",
+    )
+    # Handling 10 digit CPF cases
+    .assign(cpf_cnpj= lambda _df: _df["cpf_cnpj"].str.zfill(11))
 )
 
 # Connection to database (SQLite)
