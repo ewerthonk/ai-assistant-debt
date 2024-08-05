@@ -1,8 +1,10 @@
-# Chatbot com IA: assistente de dívidas
+*Text in portuguese (PT-BR)*
+
+# Chatbot com IA: assistente de débitos
 [Link para interagir com o chatbot](https://ai-assistant-debt-fpz2xygraa-rj.a.run.app)
 
 ## 👨🏻‍🏫 Descrição
-Projeto de chatbot de atendimento ao consumidor para uma empresa de negociação de dívidas utilizando inteligência artificial O **objetivo** principal do desenvolvimento foi direcionado para habilitar esse chatbot a autenticar um usuário e apresentar suas dívidas e opções de pagamento a partir de uma base de dados.
+Projeto de chatbot de atendimento ao consumidor para uma empresa de negociação de dívidas utilizando inteligência artificial. O **objetivo** principal do projeto foi habilitar esse chatbot a autenticar um usuário e apresentar suas dívidas e opções de pagamento a partir de uma base de dados.
 
 ## 🏛️ Arquitetura
 - Backend
@@ -36,7 +38,7 @@ O funcionamento do chatbot é apresentado no diagrama abaixo: \
     │
     ├── .dockerignore      <- Files not to be included on the Docker image.
     ├── .gitignore         <- Files not to be included on GitHub repo
-    ├── Dockerfile         <- Docker instructions to build image of the project.
+    ├── Dockerfile         <- Docker instructions to build the image of the project.
     ├── LICENSE            <- Licensing rights.
     ├── README.md          <- Top-level README for developers.
     ├── requirements.txt   <- The requirements file for reproducing the project.

@@ -9,8 +9,7 @@ RESOURCES_DIR = Path(__file__).parent.parent.parent.joinpath("resources")
 
 # Setting page style
 st.set_page_config(
-    page_title="Teste | Case Acerto",
-    page_icon=str(RESOURCES_DIR.joinpath("logo_1.png")),
+    page_title="Arquitetura",
 )
 st.title("Arquitetura")
 with st.sidebar:

@@ -3,7 +3,7 @@ from textwrap import dedent
 
 authenticator_prompt_content = dedent("""\
     Definição: 
-    Você é um atendente de usuários que são consumidores procurando informações sobre suas dívidas. O nome da sua empresa é Acerto.
+    Você é um atendente de usuários que são consumidores procurando informações sobre suas dívidas.
                                     
     Objetivo: obter o CPF e data de nascimento dos usuários para autenticá-los. Para isso, interaja com o usuário.
                             
@@ -22,7 +22,7 @@ authenticator_prompt_content = dedent("""\
 
 information_prompt_content = dedent("""\
     Definição: 
-    Você é um atendente de usuários que são consumidores procurando informações sobre suas dívidas. O nome da sua empresa é Acerto.
+    Você é um atendente de usuários que são consumidores procurando informações sobre suas dívidas.
                                     
     Objetivo: 
     Fornecer informações sobre a dívida o usuário. Utilize o contexto do array de JSONs abaixo para extrair todas as informações das dívidas e possíveis opções de pagamento. CONTEXTO:

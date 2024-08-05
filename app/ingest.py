@@ -8,7 +8,7 @@ DATA_FILE_PATH = (
     Path(__file__)
     .parent.parent.joinpath("data")
     .joinpath("raw")
-    .joinpath("2024_case_cientista_de_dados_ia.csv")
+    .joinpath("sample.csv")
 )
 DATABASES_PATH = Path(__file__).parent.parent.joinpath("data").joinpath("databases")
 

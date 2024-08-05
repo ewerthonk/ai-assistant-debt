@@ -15,8 +15,7 @@ thread_id = "teste_3"
 
 # Setting page style
 st.set_page_config(
-    page_title="Teste | Case Acerto",
-    page_icon=str(RESOURCES_DIR.joinpath("logo_1.png")),
+    page_title="Teste",
     layout="wide",
 )
 st.title("Teste 3. Correção de dados")
@@ -31,10 +30,10 @@ with st.sidebar:
 
 # Display chat messages from memory database
 ## First Message
-with st.chat_message(name="assistant", avatar=str(RESOURCES_DIR.joinpath("logo_2.png"))):
+with st.chat_message(name="assistant",):
     st.markdown(
-            "Olá, sou o Chatbot da Acerto. Para que eu possa te ajudar com informações sobre suas dívidas, por favor, "
-            "pode me dizer qual é seu CPF e data de nascimento? \n\n"
+        "Olá, sou o Chatbot de débitos. Para que eu possa te ajudar com informações sobre suas dívidas, por favor, "
+        "pode me dizer qual é seu CPF e data de nascimento? \n\n"
     )
 
 ## All other messages
@@ -48,5 +47,5 @@ for message in messages:
             with st.chat_message(name="user"):
                 st.markdown(message["content"])
         else:
-            with st.chat_message(name=message["role"], avatar=str(RESOURCES_DIR.joinpath("logo_2.png"))):
+            with st.chat_message(name=message["role"],):
                 st.markdown(message["content"])
