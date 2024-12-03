@@ -1,7 +1,7 @@
 # AI Agent - Debt Information Assistant
 
 <div align="center">
-  <em>Creating an AI Agent to retrieve debt information for customers</em>
+  <em>Creating an AI Agent to retrieve debt information for customers.</em>
 </div>
 
 <br>
