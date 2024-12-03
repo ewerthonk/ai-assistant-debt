@@ -1,6 +1,10 @@
 # AI Agent - Debt Information Assistant
 
-*Creating an AI Agent to retrieve debt information for customers*
+<div align="center">
+  <em>Creating an AI Agent to retrieve debt information for customers</em>
+</div>
+
+<br>
 
 <div align="center">
 <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54">
