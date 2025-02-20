@@ -38,8 +38,6 @@ The Agent must be able to:
 - Validate the customer's CPF in the database.
 - Provide information to the customer regarding their debt.
 
-More information about the project planning, including the framework, technologies and decision making in the
-
 ### 🏛️ Achitecture
 
 - Backend
